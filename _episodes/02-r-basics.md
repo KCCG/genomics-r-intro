@@ -208,6 +208,8 @@ have advice, and one to start with is the [tidyverse R style guide](http://style
 > want is "human_chr_number".
 >
 > <img src="../fig/rstudio_script_warning.png" alt="rstudio script warning" style="width: 600px;"/>
+> Pay particular attention to any warning or error messages that appear in red text.
+> Some messages you can safely ignore, but for red-text messages you will generally want to search for the error message on Google or StackOverflow.
 {: .callout}
 
 ## Reassigning object names or deleting objects
@@ -236,8 +238,7 @@ rm(gene_name)
 {: .language-r}
 
 If you run a line of code that has only an object name, R will normally display
-the contents of that object. In this case, we are told the object no
-longer exists.
+the contents of that object. In this case, we are told the object no longer exists.
 
 ~~~
 Error: object 'gene_name' not found
@@ -467,14 +468,10 @@ human_chr_number * 2
 
 ## Vectors
 
-Vectors are probably the
-most used commonly used object type in R. 
+Vectors are probably the most used commonly used object type in R. 
 **A vector is a collection of values that are all of the same type (numbers, characters, etc.)**. 
-One of the most common
-ways to create a vector is to use the `c()` function - the "concatenate" or
-"combine" function. Inside the function you may enter one or more values; for
-multiple values, separate each value with a comma:
-
+One of the most common ways to create a vector is to use the `c()` function - the "concatenate" or "combine" function. 
+Inside the function you may enter one or more values; for multiple values, separate each value with a comma:
 
 ~~~
 # Create the SNP gene name vector
@@ -530,10 +527,9 @@ str(snp_genes)
 ~~~
 {: .output}
 
-Vectors are quite important in R. Another data type that we will
-work with later in this lesson, data frames, are collections of
-vectors. What we learn here about vectors will pay off even more
-when we start working with data frames. 
+Vectors are quite important in R. 
+Another data type that we will work with later in this lesson, data frames, are collections of vectors. 
+What we learn here about vectors will pay off even more when we start working with data frames. 
 
 ## Creating and subsetting vectors
 
@@ -607,9 +603,12 @@ snp_genes[c(1, 3, 4)]
 ~~~
 {: .output}
 
-There are additional (and perhaps less commonly used) ways of subsetting a
-vector (see [these
-examples](https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html)).
+There are additional (and perhaps less commonly used) ways of subsetting a vector (see [these examples](https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html)).
+Come back to this link and read it slowly at your leisure later. 
+R has a rich repertoire of notations for indexing and sub-setting vectors, and some of them appear quite cryptic until you get the hang of them. 
+When writing your own code you can get a lot done with just a few of these tools, but mastering the full range of options will empower you to read other people's code, which is an excellent way to learn.
+
+
 Also, several of these subsetting expressions can be combined:
 
 
@@ -629,9 +628,8 @@ snp_genes[c(1:3,4)]
 
 ## Adding to, removing, or replacing values in existing vectors
 
-Once you have an existing vector, you may want to add a new item to it. To do
-so, you can use the `c()` function again to add your new value:
-
+Once you have an existing vector, you may want to add a new item to it. 
+To do so, you can use the `c()` function again to add your new value:
 
 ~~~
 # add the gene 'CYP1A1' and 'APOA5' to our list of snp genes
@@ -730,7 +728,10 @@ Notice in the operation above that R inserts an `NA` value to extend our vector 
 
 ## Logical Subsetting
 
-There is one last set of cool subsetting capabilities we want to introduce. It is possible within R to retrieve items in a vector based on a logical evaluation or numerical comparison. For example, let's say we wanted get all of the SNPs in our vector of SNP positions that were greater than 100,000,000. We could index using the '>' (greater than) logical operator:
+There is one last set of cool subsetting capabilities we want to introduce. 
+It is possible within R to retrieve items in a vector based on a logical evaluation or numerical comparison. 
+For example, let's say we wanted get all of the SNPs in our vector of SNP positions that were greater than 100,000,000. 
+We could index using the '>' (greater than) logical operator:
 
 
 ~~~
@@ -1152,3 +1153,8 @@ snp_data$position[1]
 [1] 8762685
 ~~~
 {: .output}
+
+Put a mental bookmark here. W
+e won't use lists for the rest of this course, but you will see them a lot as you do more R programming. 
+When this happens, pause for a moment to digest the tutorial above. 
+You'll then have a much better understanding of how the data is organised.
