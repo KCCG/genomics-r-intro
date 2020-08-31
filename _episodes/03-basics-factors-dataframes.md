@@ -38,26 +38,22 @@ source: Rmd
 
 ## Working with spreadsheets (tabular data)
 
-A substantial amount of the data we work with in genomics will be tabular data,
-this is data arranged in rows and columns - also known as spreadsheets. We could
-write a whole lesson on how to work with spreadsheets effectively ([actually we did](https://datacarpentry.org/organization-genomics/)). For our
-purposes, we want to remind you of a few principles before we work with our
-first set of example data:
+A substantial amount of the data we work with in genomics will be tabular data, this is data arranged in rows and columns - also known as spreadsheets. 
+We could write a whole lesson on how to work with spreadsheets effectively ([actually we did](https://datacarpentry.org/organization-genomics/)). 
+For our purposes, we want to remind you of a few principles before we work with our first set of example data:
 
 **1) Keep raw data separate from analyzed data**
 
-This is principle number one because if you can't tell which files are the
-original raw data, you risk making some serious mistakes (e.g. drawing conclusion
+This is principle number one because if you can't tell which files are the original raw data, you risk making some serious mistakes (e.g. drawing conclusion
 from data which have been manipulated in some unknown way).
 
 **2) Keep spreadsheet data Tidy**
 
 The simplest principle of **Tidy data** is that we have one row in our
 spreadsheet for each observation or sample, and one column for every variable
-that we measure or report on. As simple as this sounds, it's very easily
-violated. Most data scientists agree that significant amounts of their time is
-spent tidying data for analysis. Read more about data organization in
-[our lesson](https://datacarpentry.org/organization-genomics/) and
+that we measure or report on. As simple as this sounds, it's very easily violated. 
+Most data scientists agree that significant amounts of their time is spent tidying data for analysis. 
+Read more about data organization in[our lesson](https://datacarpentry.org/organization-genomics/) and
 in [this paper](https://www.jstatsoft.org/article/view/v059i10).
 
 **3) Trust but verify**
@@ -81,6 +77,50 @@ in your analysis, and its reproducibility.
 > that case, be sure to save the manipulated data into a new file. More on this
 > later in the lesson.  
  {: .callout}
+ 
+## Exploring in-built data sets
+
+A critical step in any data analysis project is getting the data into R in the first place.
+In fact, sometimes importing data will require more work than actually doing this analysis.
+Before we learn how to import data from spreadsheets, let's have a look at some of the in-built data sets that come with R.
+
+Click on the `Packages` tab in the bottom-right quadrant.
+Scroll down until you see the `datasets` package.
+The checkbox next to "datasets" will probably be selected, indicating that this package is loaded.
+If not, click the checkbox now.
+(We will learn more about installing and loading packages in a later lesson.)
+
+<img src="../fig/packages.png" />
+
+Type "data()" to view a list of available data sets, along with a brief description of each one.
+There is a remarkable diversity of different types of data here, from erruptions of the "Old Faithful" geyser in Yellowstone National Park through to the effect of Vitamin C on tooth growth in guinea pigs.
+Many of these data sets have some kind link to biology.
+You can learn more details about a data set with the `?` operator.
+Try "?Indometh" for example.
+Loading a data set is even easier -- just assign the name of the data set to a variable.
+
+~~~
+# View detailed description of the Indometh data set
+?Indometh
+# Load Indometh data set
+my_dataset <- Indometh
+~~~
+{: .language-r}
+
+Once you have created a variable to "hold" the data set, the name of the variable (in this case `my_dataset`) should appear in the `Environment` tab in the top right quarter.
+Click on the little blue circle with a white triangle next to the name of the variable.
+The triangle will spin around to point downwards, and a whole lot of information about the data set will be expanded below the variable name.
+This is the same "structure" information that you would see if you typed "str(my_dataset)". 
+Go ahead, try it from the Console as well as in the `Environment` tab.
+At first glance, the structure will look a bit complicated.
+Don't worry -- it will make sense in a moment.
+
+Next, click on the **name** of the variable (`my_dataset`).
+In the top left quadrant you should see the data displayed in a format that looks a bit like a spreadsheet.
+You can search for particular values, reorder columns or filter for particular values.
+
+<img src="../fig/packages.png" />
+
 
 ## Importing tabular data into R
 There are several ways to import data into R. For our purpose here, we will
