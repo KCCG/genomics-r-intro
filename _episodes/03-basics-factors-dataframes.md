@@ -119,8 +119,36 @@ Next, click on the **name** of the variable (`my_dataset`).
 In the top left quadrant you should see the data displayed in a format that looks a bit like a spreadsheet.
 You can search for particular values, reorder columns or filter for particular values.
 
-<img src="../fig/packages.png" />
+<img src="../fig/data_view.png" />
 
+For example, try clicking the litle `Filter` icon and then selecting "3" under "Subject".
+The data set will be filtered to only show data for subject 3.
+Play around with the search box and the little triangles for reordering columns.
+
+Now have another look at the structural information for this data set.
+The first few rows are "Subject", "time" and "conc".
+These are the names of the three columns in our data set.
+After the column names is an indication of the **type** of data stored in each column.
+Here "time" and "conc" are both numeric, while "Subject" is a **categorical** variable.
+In R-speak, categorical variables are described as "factors" and the number of distinct categories is described as the number of "levels". 
+We'll discuss factors in more detail in a moment, but they are quite handy for certain types of plots and certain kinds of statistical tests.
+The rest of the "structural" information is in the form of "attributes".
+Attributes are a whole other can of worms that we will leave unopened for now, but now that you have seen the data in "spreadsheet" form it should be a lot easier to make sense of the structural information.
+You'll also notice that the structural information reveals important nuances about the way the data is organised.
+For example, just looking at the spreadsheet view you might be tempted to think that the values in the "Subject" column are numbers -- they're not, they are actually factors, in this case "labels" for each subject in the experiment. 
+You might sometimes want to add two concentrations together, but it doesn't make sense to add to labels together -- and with the appropriate choice of data type R won't let you.
+
+In a moment we'll learn how to important some genomic data, and we'll learn various ways to subset and manipuate this dataset.
+But before we do, select two or three in built data sets and take a moment to familiarise yourself with the kind of data that they contain.
+As you learn various tecnhiques of manipulating data, try to apply these techniques to your chosen data set.
+By playing and experimenting with the tools you will learn far more effectively than just following the instructions in these notes.
+
+One last comment on built-in datasets: you too can create datasets that can be loaded with ease.
+This is a powerful way of publishing your data, and it makes collaborations much easier.
+And never forget, the person you are most likely to collaborate with is your future self.
+We'll touch on how to do this at the end of the course, but for now just note this as an aspiration.
+
+==== Edited up to here ===
 
 ## Importing tabular data into R
 There are several ways to import data into R. For our purpose here, we will
