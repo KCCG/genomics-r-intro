@@ -66,13 +66,6 @@ analyzing data in R:
    reproducible. Also, there are thousands of available software packages for
    science, including genomics and other areas of life science.
 
-> ## Discussion: Your experience
->
-> What has motivated you to learn R? Have you had a research question for which
-> spreadsheet programs such as Excel have proven difficult to use, or where the
-> size of the data set created issues?
-{: .discussion}
-
 
 ## Introducing RStudio Server
 
