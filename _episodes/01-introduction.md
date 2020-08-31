@@ -65,52 +65,32 @@ analyzing data in R:
    reproducible. Also, there are thousands of available software packages for
    science, including genomics and other areas of life science.
 
-> ## Discussion: Your experience
->
-> What has motivated you to learn R? Have you had a research question for which
-> spreadsheet programs such as Excel have proven difficult to use, or where the
-> size of the data set created issues?
-{: .discussion}
+## Create a project on the Garvan GitLab server
 
+You probably already use Lab Archives to manage your experimental records. 
+The equivalent tool for managing code is called "git" and projects are managed as "repositories". 
+There are many advantages for using git, including version management and collaboration. 
+Although git has many sophisticated options, the basics are quite simple and the best way to learn is to practice. 
 
-## Introducing RStudio Server
+There are three popular services for managing repositories: GitHub, GitLab and BitBucket. 
+They are all quite similar but we'll be using GitLab because 1) Garvan has an Enterprise license, 2) GitLab can be integrated with Jira etc, and 3) it is very easy to add other Garvan staff as collaborators. 
+
+The basic workflow is described on this [Confluence page](https://intranet.gimr.garvan.org.au/display/BINF/Simple+workflow+for+GitLab+and+RStudio). 
+Before we get started with RStudio, first complete this initial workflow. 
+
+In Step 1), call your project "dc_genomics_r". 
+Then when you specify a directory in Step 2) we suggest making the new project directory a sub-directory of "~/projects" rather than on your desktop or directly under your home directory. 
+This is the directory path that we will use in the rest of this tutorial - if you put your project somewhere else or call it something different then you will need to translate accordingly.
+
+This workflow will take a couple of extra minutes each time, but we strongly recommend creating a new repository on GitLab each time you start a new project.
+
+## Introducing RStudio 
 
 In these lessons, we will be making use of a software called [RStudio](https://www.rstudio.com/products/RStudio/),
 an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment).
 RStudio, like most IDEs, provides a graphical interface to R, making it more
 user-friendly, and providing dozens of useful features. We will introduce
-additional benefits of using RStudio as you cover the lessons. In this case,
-we are specifically using [RStudio Server](https://www.rstudio.com/products/RStudio/#Server),
-a version of RStudio that can be accessed in your web browser. RStudio Server
-has the same features of the Desktop version of RStudio you could download as
-standalone software.
-
-## Log on to RStudio Server
-
-Open a web browser and enter the IP address of your instance 
-(provided by your instructors), followed by
-`:8787`. For example, if your IP address was 123.45.67.89 your URL would be
-
-```
-http://123.45.67.89:8787
-```
-
-> ## Tip: Make sure there are no spaces before or after your URL or
-> your web browser may interpret it as a search query.
-{: .callout}
-
-You should now be looking at a page that will allow you to login to the RStudio
-server:
-
-<img src="../fig/rstudio_login_screen.png" alt="rstudio default session" style="width: 1000px;"/>
-
-Enter your user credentials and click <kbd>Sign In</kbd>. The credentials for
-the genomics Data Carpentry instances will be provided by your instructors. 
-
-You should now see the RStudio interface:
-
-<img src="../fig/rstudio_session_default.png" alt="rstudio default session" style="width:1000px;"/>
-
+additional benefits of using RStudio as you cover the lessons. 
 
 ## Create an RStudio project
 
@@ -135,20 +115,15 @@ you may leave the default, which is your home directory "~".
 pane (more about the RStudio layout in a moment), you should see an RStudio
  project file, **dc_genomics_r.Rproj**. All RStudio projects end with the
  "**.Rproj**" file extension.
-
->## Tip: Make your project more reproducible with Packrat
-> One of the most wonderful and also frustrating aspects of working with R is
-> managing packages. We will talk more about them, but packages (e.g. ggplot2)
-> are add-ons that extend what you can do with R. Unfortunately it is very
-> common that you may run into versions of R and/or R packages that are not
-> compatible. This may make it difficult for someone to run your R script using
-> their version of R or a given R package, and/or make it more difficult to run
-> their scripts on your machine. [Packrat](https://rstudio.github.io/packrat/)
-> is an RStudio add-on that will associate your packages and project so that
-> your work is more portable and reproducible. To turn on Packrat click on
-> the <KBD>Tools</KBD> menu and select <KBD>Project Options</KBD>. Under
-> **Packrat** check off "**Use packrat with this project**" and follow any
-> installation instructions.
+ 
+>## Tip: Make your project more reproducible with renv
+> One of the most wonderful and also frustrating aspects of working with R is managing packages. 
+> We will talk more about them, but packages (e.g. ggplot2) are add-ons that extend what you can do with R. 
+> Unfortunately it is very common that you may run into versions of R and/or R packages that are not compatible. 
+> This may make it difficult for someone to run your R script using their version of R or a given R package, and/or make it more difficult to run their scripts on your machine. 
+> [renv](https://rstudio.github.io/renv/) is an RStudio add-on that will associate your packages and project so that your work is more portable and reproducible. 
+> The renv package supercedes another package called "packrat". 
+> They both do basically the same thing, but renv does it better.
 {: .callout}
 
 ## Creating your first R script
@@ -191,10 +166,10 @@ environment:
   loaded, or you can attach installed packages. "Help" will display help files
   for R functions and packages.
 
->## Tip: Uploads and downloads in the cloud
-> In the "Files" tab you can select a file and download it from your cloud
-> instance (click the "more" button) to your local computer.
-> Uploads are also possible.
+>## Tip: One of the big advantages of using RStudio is the fact that all of the different panes are *integrated*. 
+For example, you can create a variable in a script, then watch the execution of the command that creates the variable in the console, and finally inspect the contents of the variable in the environment.
+At first, it is a mild case of information overload. 
+But learning how to interprt the information in each of these panes will greatly increase your ability to keep track of what is happening.
 {: .callout}
 
 All of the panes in RStudio have configuration options. For example, you can
@@ -204,11 +179,12 @@ pane layout are in the <KBD>View</KBD> menu. Other options such as font sizes,
 colors/themes, and more are in the <KBD>Tools</KBD> menu under
 <KBD>Global Options</KBD>.
 
->## You are working with R
-> Although we won't be working with R at the terminal, there are lots of reasons
+>## R and RStudio are not the same
+> R is a programming language (and an interpreter for running commands in that 
+> language). RStudio is integrated development environment, a set of tools for working
+> with R. You can use R from the terminal without RStudio, and there are lots of reasons
 > to. For example, once you have written an RScript, you can run it at any Linux
-> or Windows terminal without the need to start up RStudio. We don't want
-> you to get confused - RStudio runs R, but R is not RStudio. For more on
+> or Windows terminal without the need to start up RStudio. For more on
 > running an R Script at the terminal see this [Software Carpentry lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
 {: .callout}
 
@@ -233,7 +209,7 @@ line of your script in the header of the Source pane.
 In the console, we expect to see the following output*:
 
 ~~~
-[1] "/home/dcuser/dc_genomics_r"
+[1] "/Users/your_username/projects/dc_genomics_r"
 ~~~
 {: .output}
 
@@ -253,6 +229,9 @@ getwd()
 ~~~
 {: .language-r}
 
+Be liberal with your comments, especially the comments that you leave to your future self revising the content of this course. 
+It is possible to "overdo" comments, but most code could do with greater explanation, not less.
+
 > ## Exercise: Work interactively in R
 >
 > What happens when you try to enter the `getwd()` command in the Console pane?
@@ -265,10 +244,9 @@ getwd()
 > {: .solution}
 {: .challenge}
 
-For the purposes of this exercise we want you to be in the directory `"/home/dcuser/R_data"`.
-What if you weren't? You can set your home directory using the `setwd()`
-command. Enter this command in your script, but *don't run* this yet.
-
+For the purposes of this exercise we want you to be in the directory `"/Users/your_username/projects/dc_genomics_r"`.
+What if you weren't? You can set your home directory using the `setwd()`command. 
+Enter this command in your script, but *don't run* this yet.
 
 ~~~
 # This sets the working directory
@@ -286,13 +264,13 @@ and `dc_genomics_r` directory. The path in your script should look like this:
 
 ~~~
 # This sets the working directory
-setwd("/home/dcuser/dc_genomics_r")
+setwd("/Users/home/your_username/dc_genomics_r")
 ~~~
 {: .language-r}
 
-When you run this command, the console repeats the command, but gives you no
-output. Instead, you see the blank R prompt: `>`. Congratulations! Although it
-seems small, knowing what your working directory is and being able to set your
+When you run this command, the console repeats the command, but gives you no output. 
+Instead, you see the blank R prompt: `>`. Congratulations! 
+Although it seems small, knowing what your working directory is and being able to set your
 working directory is the first step to analyzing your data.
 
 > ## Tip: Never use `setwd()`
@@ -312,10 +290,10 @@ working directory is the first step to analyzing your data.
 
 ## Using functions in R, without needing to master them
 
-A function in R (or any computing language) is a short
-program that takes some input and returns some output. Functions may seem like an advanced topic (and they are), but you have already
-used at least one function in R. `getwd()` is a function! The next sections will help you understand what is happening in
-any R script.
+A function in R (or any computing language) is a shortprogram that takes some input and returns some output. 
+Functions may seem like an advanced topic (and they are), but you have already used at least one function in R. 
+`getwd()` is a function! 
+The next sections will help you understand what is happening in any R script.
 
 > ## Exercise: What do these functions do?
 >
@@ -338,8 +316,7 @@ any R script.
 > {: .solution}
 {: .challenge}
 
-You have hopefully noticed a pattern - an R
-function has three key properties:
+You have hopefully noticed a pattern - an R function has three key properties:
 - Functions have a name (e.g. `dir`, `getwd`); note that functions are case
   sensitive!
 - Following the name, functions have a pair of `()`
@@ -396,13 +373,11 @@ NULL
 ~~~
 {: .output}
 
-`round()` takes two arguments, `x`, which is the number to be 
-rounded, and a
-`digits` argument. The `=` sign indicates that a default (in this case 0) is
-already set. Since `x` is not set, `round()` requires we provide it, in contrast
-to `digits` where R will use the default value 0 unless you explicitly provide
-a different value. We can explicitly set the digits parameter when we call the
-function:
+`round()` takes two arguments, `x`, which is the number to be rounded, and a `digits` argument. 
+The `=` sign indicates that a default (in this case 0) is already set. 
+Since `x` is not set, `round()` requires we provide it, in contrast to `digits` where R will use the default value 0 unless you explicitly provide
+a different value. 
+We can explicitly set the digits parameter when we call the function:
 
 
 ~~~
@@ -418,9 +393,8 @@ round(3.14159, digits = 2)
 {: .output}
 
 Or, R accepts what we call "positional arguments", if you pass a function
-arguments separated by commas, R assumes that they are in the order you saw
-when we used `args()`. In the case below that means that `x` is 3.14159 and
-digits is 2.
+arguments separated by commas, R assumes that they are in the order you saw when we used `args()`. 
+In the case below that means that `x` is 3.14159 and digits is 2.
 
 
 ~~~
