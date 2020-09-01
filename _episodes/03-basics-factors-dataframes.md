@@ -410,6 +410,8 @@ Ok, thats a lot up unpack! Some things to notice.
 
 ## Introducing Factors
 
+=== Skip this section ===
+
 Factors are the final major data structure we will introduce in our R genomics
 lessons. Factors can be thought of as vectors which are specialized for
 categorical data. Given R's specialization for statistics, this make sense since
@@ -924,6 +926,8 @@ summary(SRR2584863_variants)
 
 ## Coercing values in data frames
 
+=== Read this section but don't do it ====
+
 > ## Tip: coercion isn't limited to data frames
 >
 > While we are going to address coercion in the context of data frames
@@ -1168,6 +1172,8 @@ typeof(variants$REF)
 {: .output}
 
 ## StringsAsFactors = FALSE
+
+=== Read but don't do ===
 
 Lets summarize this section on coercion with a few take home messages.
 
