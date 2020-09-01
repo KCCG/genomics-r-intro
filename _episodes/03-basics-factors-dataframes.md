@@ -259,13 +259,8 @@ variants <- readr::read_csv("data-raw/combined_tidy_vcf.csv")
 ~~~
 {: .language-r}
 
-==== Edited up to here ===
-
-
-One of the first things you should notice is that in the Environment window,
-you have the `variants` object, listed as 801 obs. (observations/rows)
-of 29 variables (columns). Double-clicking on the name of the object will open
-a view of the data in a new tab.
+One of the first things you should notice is that in the Environment window, you have the `variants` object, listed as 801 obs. (observations/rows) of 29 variables (columns). 
+Double-clicking on the name of the object will open a view of the data in a new tab.
 
 <img src="../fig/rstudio_dataframeview.png" alt="rstudio data frame view" style="width: 1000px;"/>
 
