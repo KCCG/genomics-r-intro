@@ -237,7 +237,7 @@ In this course we will be focusing on a handful of very common general purpose p
 
 Let's install the `readr` package so that we can import some data.
 ~~~
-renv::install("reader")
+renv::install("readr")
 ~~~
 {: .language-r}
 
