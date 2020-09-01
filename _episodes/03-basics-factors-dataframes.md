@@ -544,7 +544,9 @@ If not, ask your instructor to provide one.
 > {: .solution}
 {: .challenge}
 
-Now that we have a ...
+Now that you have had a closer look at the data, and have a bit better understanding of what kind of data should be in each column, you can return to the little script that you wrote to load data with the `read_csv()` function.
+
+
 
 ## Subsetting data frames
 
@@ -1002,6 +1004,10 @@ summary(SRR2584863_variants)
 
 === Read this section but don't do it ====
 
+If you load the data correctly (by specifying the data type for each column) then you won't have to coerce values.
+Getting it right from the beginning is cleaner and simpler.
+But it is nice to know that you have this option, in case you get handed a data frame where the data types are not quite right.
+
 > ## Tip: coercion isn't limited to data frames
 >
 > While we are going to address coercion in the context of data frames
@@ -1368,7 +1374,7 @@ colnames(variants)
 ## Saving your data frame to a file
 
 We can save data to a file. We will save our `SRR2584863_variants` object
-to a .csv file using the `write.csv()` function:
+to a .csv file using the `write_csv()` function:
 
 
 ~~~
