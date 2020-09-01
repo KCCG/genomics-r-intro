@@ -148,13 +148,12 @@ This is a powerful way of publishing your data, and it makes collaborations much
 And never forget, the person you are most likely to collaborate with is your future self.
 We'll touch on how to do this at the end of the course, but for now just note this as an aspiration.
 
-==== Edited up to here ===
-
 ## Importing tabular data into R
-There are several ways to import data into R. For our purpose here, we will
-focus on using the tools every R installation comes with (so called "base" R) to
-import a comma-delimited file containing the results of our variant calling workflow.
-We will need to load the sheet using a function called `read.csv()`.
+There are several ways to import data into R. 
+The original Data Carpentry workshop uses a function called `read.csv()` that is included with every R installation.
+However, this function is a little quirky and may not behave exactly as you might expect.
+This in itself can be instructive, so I have retained some of the exercises based on `read.csv()`.
+Before we look at the method that I **actually** recommend, let's take a closer look at the `read.csv()` function.
 
 > ## Exercise: Review the arguments of the `read.csv()` function
 >
@@ -204,6 +203,15 @@ We will need to load the sheet using a function called `read.csv()`.
 >> frequently, you may be surprised at what you find they can do.
 > {: .solution}
 {: .challenge}
+
+Make a habit of checking the documentation every time you use a new function.
+Do this even if you are following a tutorial or vignette.
+It will help you understand what is happening, and also give you an idea about what other options are available.
+In particular, pay attention to the default values that are used when a parameter is NOT specified.
+This may or may not match your expectations.
+
+==== Edited up to here ===
+
 
 Now, let's read in the file `combined_tidy_vcf.csv` which will be located in
 `/home/dcuser/.solutions/R_data/`. Call this data `variants`. The
