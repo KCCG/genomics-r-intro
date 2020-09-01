@@ -283,11 +283,14 @@ Then we can call this script as the first step of our subsequent analyses.
 Create a new script and enter the following.
 
 ~~~
-## read in a CSV file and save it as 'variants'
-
+# read in a CSV file and save it as 'variants'
+library(readr)
 variants <- readr::read_csv("data-raw/combined_tidy_vcf.csv")
 ~~~
 {: .language-r}
+
+Save the script, commit it to your git repo and push the changes to GitLab.
+Then use the `Source` button (next to the `Run` button in the editor pane) to run all of the commands in the script from top to bottom.
 
 One of the first things you should notice is that in the Environment window, you have the `variants` object, listed as 801 obs. (observations/rows) of 29 variables (columns). 
 Double-clicking on the name of the object will open a view of the data in a new tab.
@@ -469,69 +472,54 @@ Ok, thats a lot up unpack! Some things to notice.
   by the object mode (e.g. factor, int, num, etc.). Notice that before each
   variable name there is a `$` - this will be important later.
 
-## Introducing Factors
+You may have noticed that the data type is actually `tibble` rather than `data.frame`.
+A `tibble` is essentially a simplified `data frame`.
+There are some subtle differences but for the purposes of this course we can (hopefully) ignore them.
+If you'd like to learn more then there is [a chapter on tibbles](https://r4ds.had.co.nz/tibbles.html) in the excellent [R for Data Science](https://r4ds.had.co.nz/).
+I cannot recommend this book highly enough, and if you are serious about learning R then I'd encourage you to read this (free) book from cover to cover (after you finish this course and perhaps some of the introductory Data Camp courses).
 
-=== Skip this section ===
+For the rest of this course, I am going to use `tibble` and `data frame` interchangeably. 
 
-Factors are the final major data structure we will introduce in our R genomics
-lessons. Factors can be thought of as vectors which are specialized for
-categorical data. Given R's specialization for statistics, this make sense since
-categorial and continuous variables usually have different treatments. Sometimes
-you may want to have data treated as a factor, but in other cases, this may be
-undesirable.
+## Where did this data come from?
 
-Since some of the data in our data frame are factors, lets see how factors work. First, we'll
-extract one of the columns of our data frame to a new object, so that we don't end up
-modifying the `variants` object by mistake.
+You may (or may not) recognise some of the column headings.
+Some are easy to interpret, like CHROM (chromosome) and POS (position).
+You may have guesed that REF means "reference sequence" and ALT stands for the "alternative sequence".
+Some of the other coloumns are a bit more cryptic, but the "vcf" in the file name is a clue.
+Look back at the [Variant Calling Workflow](https://kccg.github.io/wrangling-genomics/04-variant_calling/index.html) chapter from the [Data Wrangling and Processing for Genomics](https://kccg.github.io/wrangling-genomics/) course.
+Towards the end of this chapter there is a section called "Explore the VCF format".
+This section contains a brief description about what each of these fields mean.
+Don't get too bogged down in the technical details, but do cross reference at least some of the fields.
+Learning how to look things up is probably a more valuable skill than memorising all of these details.
 
+If you completed that chapter in the earlier course, you should have a few VCF files of your own to examine.
+If not, ask your instructor to provide one.
 
-~~~
-## extract the "REF" column to a new object
-
-REF <- variants$REF
-~~~
-{: .language-r}
-
-Let's look at the first few items in our factor using `head()`:
-
-
-~~~
-head(REF)
-~~~
-{: .language-r}
-
-
-
-~~~
-[1] "T"        "G"        "G"        "CTTTTTTT" "CCGC"     "C"       
-~~~
-{: .output}
-
-What we get back are the items in our factor, and also something called "Levels".
-**Levels are the different categories contained in a factor**. By default, R
-will organize the levels in a factor in alphabetical order. So the first level in this factor is
-"A".
-
-Lets look at the contents of a factor in a slightly different way using `str()`:
-
-
-~~~
-str(REF)
-~~~
-{: .language-r}
-
-
-
-~~~
- chr [1:801] "T" "G" "G" "CTTTTTTT" "CCGC" "C" "C" "G" ...
-~~~
-{: .output}
-
-For the sake of efficiency, R stores the content of a factor as a vector of
-integers, which an integer is assigned to each of the possible levels. Recall
-levels are assigned in alphabetical order. In this case, the first item in our "REF" object is
-"T", which happens to be the 49th level of our factor, ordered alphabeticaly. The next two
-items are both "G"s, which is the 33rd level of our factor.
+> ## Exercise
+>
+> Compare the VCF files from the previous course to the CSV file that you just loaded.
+> What is similar? And what is different?
+> How have the VCF files been processed to create the CSV file?
+> No need to get too detailed, a general intuition will be fine here.
+>
+>> ## Solution
+>>
+>> VCF files contain "headers" starting with "##" that provide a kind of meta data for the actual data that follows.
+>> These headers include an explanation of what each column means.
+>> The header files have been stripped out of the CSV file, leaving only the column headings and the actual data
+>> 
+>> A lot of data is packed into the `INFO` column of the VCF format.
+>> The information in this column will vary depending on the tool used to create the VCF file, but the basic pattern is "variable=value;variable=value..." etc.
+>> To create the CSV file that we just loaded, each variable in the `INFO` column has been unpacked into its own separate column.
+>> 
+>> Also, R data frames don't like column names that contain special characters such as colons (:).
+>> So columns that represent ratios (such as "GT:PL") have been renamed (such as "gt_PL").
+>> 
+>> Finally, the CSV file contains data from three separate VCF files, one for each of the three E.Coli samples that we looked at in the previous course.
+>> The name of the sample has been stored in the `sample_id` column, while the name of the file is stored in the `Indiv` column.
+>> The rest of the data comes from the original VCF files, with the `INFO` column unpacked as described above.
+> {: .solution}
+{: .challenge}
 
 ## Subsetting data frames
 
