@@ -210,6 +210,33 @@ It will help you understand what is happening, and also give you an idea about w
 In particular, pay attention to the default values that are used when a parameter is NOT specified.
 This may or may not match your expectations.
 
+The `read.csv()` function has a particularly troublesome default behaviour when it imports text.
+That is, `read.csv()` will try to interpret text values as `factors` (categorical variables).
+Sometimes this is exactly what you want, other times it is not.
+
+Just to confuse things even further, the default behaviour flips in R4.0.x.
+We are going to sidestep some of this confusion by using a function from the `readr` package that does basically the same thing, just a lot more elegantly.
+But first we are going to have to learn a bit about packages and how to install and load them.
+
+## Packages
+
+R comes with a lot of useful functionality "out of the box".
+These functions are known as "base R" and an important part of learning R is becoming familiar with these functions and what they can do.
+You don't necessarily need to master all of them, but knowing that "there is a function for that" is a useful first step to becoming proficient.
+This makes it easier to read other people's code, and it will stop you from trying to reinvent the wheel.
+
+However, one of the good things about R is that there is an active community of scientifc users who have developed tools for a huge range of problems, from survival analysis through to differential expression, and just about anything else that you can think of.
+Often there will be a package available "off the shelf" that does exactly what you want.
+More often you will need to combine a few different packages to do different steps.
+
+As well as specialist packages for niche analytical problems, there are also quite a few generalist packages that you will use all the time.
+These generalist packages simplify common tasks, such as loading or manipulating datasets, or creating graphs.
+In this course we will be focusing on a handful of very common general purpose packages, but the basic steps for installing, loading and managing packages will be the same.
+
+
+
+
+
 ==== Edited up to here ===
 
 
