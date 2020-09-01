@@ -243,14 +243,13 @@ You can do this by clicking the "New folder" icon, or using Finder or File Explo
 You should have received a file called `combined_tidy_vcf.csv`. If not, check with the instructor.
 Save this file to the "data-raw" directory.
 
-==== Edited up to here ===
-
-Now, let's read in the file `combined_tidy_vcf.csv` which will be located in
-`/home/dcuser/.solutions/R_data/`. Call this data `variants`. The
-first argument to pass to our `read.csv()` function is the file path for our
-data. The file path must be in quotes and now is a good time to remember to
-use tab autocompletion. **If you use tab autocompletion you avoid typos and
-errors in file paths.** Use it!
+Now, let's read in the file `combined_tidy_vcf.csv`, now located in the "data-raw" directory. 
+We'll use the `read_csv` function from the `readr` package.
+Call this data `variants`. 
+The first argument to pass to our `read_csv()` function is the file path for our data. 
+This can be a **relative** path (relative to our work directory). 
+The file path must be in quotes and now is a good time to remember to use tab autocompletion.
+**If you use tab autocompletion you avoid typos and errors in file paths.** Use it!
 
 
 ~~~
@@ -260,7 +259,7 @@ variants <- readr::read_csv("data-raw/combined_tidy_vcf.csv")
 ~~~
 {: .language-r}
 
-
+==== Edited up to here ===
 
 
 One of the first things you should notice is that in the Environment window,
