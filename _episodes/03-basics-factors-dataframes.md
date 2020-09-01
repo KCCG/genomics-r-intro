@@ -297,6 +297,29 @@ Double-clicking on the name of the object will open a view of the data in a new 
 
 <img src="../fig/rstudio_dataframeview.png" alt="rstudio data frame view" style="width: 1000px;"/>
 
+Before we start looking at the *content* of the data we just loaded, let's pause for a moment to consider *how* the `read_csv()` function interpreted the data in the CSV file.
+If you just give the `read_csv()` function a file name (without any extra arguments) then it will helpfully do its best to guess what kind of data is contained in each column. 
+The  `read_csv()` function will also print out a helpful message explaining what its guesses were.
+
+~~~
+Parsed with column specification:
+cols(
+  .default = col_double(),
+  sample_id = col_character(),
+  CHROM = col_character(),
+  ID = col_logical(),
+~~~
+{: .language-r}
+
+**Always, always** check this message to see if `read_csv()` guessed correctly.
+A lot of the time it will just work, but incorrect guesses can lead to all kinds of headaches down the track.
+Often you will need to explicitly tell `read_csv()` what kind of data is in each column.
+
+Of course, usually you will have a good idea of what kind of data you are loading.
+This data is a bit unusual because I have just given it to you with very little explanation.
+(Although this kind of situation is unfortunately quite common for bioinformaticians...)
+So will first examine the data and then later return to the question of what kind of data should be in each column.
+
 ## Summarizing and determining the structure of a data frame.
 
 A **data frame is the standard way in R to store tabular data**. A data fame
@@ -520,6 +543,8 @@ If not, ask your instructor to provide one.
 >> The rest of the data comes from the original VCF files, with the `INFO` column unpacked as described above.
 > {: .solution}
 {: .challenge}
+
+Now that we have a ...
 
 ## Subsetting data frames
 
