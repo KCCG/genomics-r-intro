@@ -233,6 +233,29 @@ As well as specialist packages for niche analytical problems, there are also qui
 These generalist packages simplify common tasks, such as loading or manipulating datasets, or creating graphs.
 In this course we will be focusing on a handful of very common general purpose packages, but the basic steps for installing, loading and managing packages will be the same.
 
+### readr
+
+Let's install the `readr` package so that we can import some data.
+~~~
+renv::install("reader")
+~~~
+{: .language-r}
+
+This will download and install the necessary files.
+When the installation is finished, you should (hopefully) see the `readr` package listed in your `Packages` view.
+
+Note: some Windows users have reported problems with `renv::install`.
+You may need to use an alternative installation tool called `BiocManager`.
+And to install `BiocManager` you may need **another** installation tool called `install.packages()`.
+
+Only if you have problems with `renv::install`, try the following. 
+(Type 'a' if prompted to update packages.)
+~~~
+install.packages("BiocManager")
+BiocManager::install("readr")
+~~~
+{: .language-r}
+
 
 ## Importing data
 
