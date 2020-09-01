@@ -251,7 +251,7 @@ errors in file paths.** Use it!
 ~~~
 ## read in a CSV file and save it as 'variants'
 
-variants <- read.csv("../r_data/combined_tidy_vcf.csv")
+variants <- readr::read_csv("data-raw/combined_tidy_vcf.csv")
 ~~~
 {: .language-r}
 
