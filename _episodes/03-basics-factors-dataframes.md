@@ -234,11 +234,16 @@ These generalist packages simplify common tasks, such as loading or manipulating
 In this course we will be focusing on a handful of very common general purpose packages, but the basic steps for installing, loading and managing packages will be the same.
 
 
+## Importing data
+
+In the spirit of keeping our data tidy, create a folder within your project folder called "data-raw". 
+You can do this by clicking the "New folder" icon, or using Finder or File Explorer.
 
 
+You should have received a file called `combined_tidy_vcf.csv`. If not, check with the instructor.
+Save this file to the "data-raw" directory.
 
 ==== Edited up to here ===
-
 
 Now, let's read in the file `combined_tidy_vcf.csv` which will be located in
 `/home/dcuser/.solutions/R_data/`. Call this data `variants`. The
