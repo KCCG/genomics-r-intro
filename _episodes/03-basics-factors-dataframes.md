@@ -1509,11 +1509,11 @@ colnames(variants)
 ## Saving your data frame to a file
 
 We can save data to a file. We will save our `SRR2584863_variants` object
-to a .csv file using the `write_csv()` function:
+to a .csv file using the `readr::write_csv()` function:
 
 
 ~~~
-write.csv(SRR2584863_variants, file = "../data/SRR2584863_variants.csv")
+readr::write_csv(SRR2584863_variants, file = "../data/SRR2584863_variants.csv")
 ~~~
 {: .language-r}
 
