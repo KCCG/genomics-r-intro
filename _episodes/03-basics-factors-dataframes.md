@@ -605,7 +605,82 @@ variants <- readr::read_csv(
 ~~~
 {: .language-r}
 
+Let's look at each column and adjust the data type if necessary.
+Refer to the "Available column specifications" in the [readr reference](https://readr.tidyverse.org/articles/readr.html).
 
+Have another look at the "INFO" definitions in the headers of the VCF file (either in the VCF file that you have been given, or in the examples in the [Variant Calling](https://kccg.github.io/wrangling-genomics/04-variant_calling/index.html) chapter).
+Each INFO definition includes a `Type` specification such as "Type=Integer" or "Type=Float" or "Type=Flag".
+
+> ## Exercise
+>
+> 1. What R data types to "Integer", "Float" and "Flag" correspond to? Look at the actual data if necessary.
+>
+> 2. Which `readr::read_csv()` column specifications should we use to guarantee the appropriate data type?
+>
+>> ## Solution
+>> 
+>> 1. "Integer"  = "integer"
+>>    "Float" = "numeric"
+>>    "Flag" = "logical"
+>>
+>> 2. "Integer" = col_integer()
+>>    "Float" = col_double()
+>>    "Flag" = col_logical()
+> {: .solution}
+{: .challenge}
+
+Edit all of the columns starting from "INDEL" in your script, replacing "col_double()" with "col_integer()" where appropriate.
+
+Now let's consider the first nine columns (`sample_id` through to `INDEL`).
+
+> ## Exercise
+>
+> Consider each column carefully.
+> Sometimes you can accept the default column specification, in other cases you should probably change it.
+> Refer to the Variant Calling chapter if you need to.
+> Sometimes there might be more than one valid choice -- don't agonise too much, we can discuss it in class.
+>
+>> ## Solution
+>> 
+>> Here is my solution:
+>>
+>>   col_types = cols(
+>>    sample_id = col_factor(),
+>>    CHROM = col_factor(),
+>>    POS = col_integer(),
+>>    ID = col_character(),
+>>    REF = col_character(),
+>>    ALT = col_character(),
+>>    QUAL = col_double(),
+>>    FILTER = col_character(),
+>>    INDEL = col_logical(),
+>>    IDV = col_integer(),
+>>    IMF = col_double(),
+>>    DP = col_integer(),
+>>    VDB = col_double(),
+>>    RPB = col_double(),
+>>    MQB = col_double(),
+>>    BQB = col_double(),
+>>    MQSB = col_double(),
+>>    SGB = col_double(),
+>>    MQ0F = col_double(),
+>>    ICB = col_logical(),
+>>    HOB = col_logical(),
+>>    AC = col_integer(),
+>>    AN = col_integer(),
+>>    DP4 = col_integer(),
+>>    MQ = col_integer(),
+>>    Indiv = col_character(),
+>>    gt_PL = col_integer(),
+>>    gt_GT = col_double(),
+>>    gt_GT_alleles = col_character()
+>>  )
+>> 
+>> Note the choice of `col_factor()` for `sample_id` and `CHROM`.
+>> That's because these values are really labels, rather than numbers or text.
+>> You could make this work with `col_character()` but R has some powerful tools for handling categorical variables, so it pays to make use of them when appropriate.
+> {: .solution}
+{: .challenge}
 
 
 ## Subsetting data frames
