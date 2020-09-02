@@ -139,7 +139,7 @@ For example, just looking at the spreadsheet view you might be tempted to think 
 You might sometimes want to add two concentrations together, but it doesn't make sense to add to labels together -- and with the appropriate choice of data type R won't let you.
 
 In a moment we'll learn how to important some genomic data, and we'll learn various ways to subset and manipuate this dataset.
-But before we do, select two or three in built data sets and take a moment to familiarise yourself with the kind of data that they contain.
+But before we do, select two or three built-in data sets and take a moment to familiarise yourself with the kind of data that they contain.
 As you learn various tecnhiques of manipulating data, try to apply these techniques to your chosen data set.
 By playing and experimenting with the tools you will learn far more effectively than just following the instructions in these notes.
 
@@ -267,9 +267,12 @@ You should have received a file called `combined_tidy_vcf.csv`. If not, check wi
 Save this file to the "data-raw" directory.
 
 Now, let's read in the file `combined_tidy_vcf.csv`, now located in the "data-raw" directory. 
-We'll use the `read_csv` function from the `readr` package.
-Call this data `variants`. 
-The first argument to pass to our `read_csv()` function is the file path for our data. 
+We'll use the `read_csv()` function from the `readr` package.
+The name of this function is confusingly similar to the `read.csv()` function in `base`, so we'll prefix it with the package name (readr) for extra clarity.
+This involves a little bit of extra typing, but it is a good habit to get into and you can use the power of auto-complete to avoid errors anyway.
+
+We'll call this data `variants`. 
+The first argument to pass to our `readr::read_csv()` function is the file path for our data. 
 This can be a **relative** path (relative to our work directory). 
 The file path must be in quotes and now is a good time to remember to use tab autocompletion.
 **If you use tab autocompletion you avoid typos and errors in file paths.** Use it!
@@ -285,11 +288,12 @@ Create a new script and enter the following.
 ~~~
 # read in a CSV file and save it as 'variants'
 library(readr)
-variants <- readr::read_csv("data-raw/combined_tidy_vcf.csv")
+variants <- readr::read_csv(file="data-raw/combined_tidy_vcf.csv")
 ~~~
 {: .language-r}
 
-Save the script, commit it to your git repo and push the changes to GitLab.
+Save the script, commit it to your git repo and push the changes to `GitLab`.
+Remember to commit and push changes to your other script periodically as well.
 Then use the `Source` button (next to the `Run` button in the editor pane) to run all of the commands in the script from top to bottom.
 
 One of the first things you should notice is that in the Environment window, you have the `variants` object, listed as 801 obs. (observations/rows) of 29 variables (columns). 
@@ -297,9 +301,9 @@ Double-clicking on the name of the object will open a view of the data in a new 
 
 <img src="../fig/rstudio_dataframeview.png" alt="rstudio data frame view" style="width: 1000px;"/>
 
-Before we start looking at the *content* of the data we just loaded, let's pause for a moment to consider *how* the `read_csv()` function interpreted the data in the CSV file.
-If you just give the `read_csv()` function a file name (without any extra arguments) then it will helpfully do its best to guess what kind of data is contained in each column. 
-The  `read_csv()` function will also print out a helpful message explaining what its guesses were.
+Before we start looking at the *content* of the data we just loaded, let's pause for a moment to consider *how* the `readr::read_csv()` function interpreted the data in the CSV file.
+If you just give the `readr::read_csv()` function a file name (without any extra arguments) then it will helpfully do its best to guess what kind of data is contained in each column. 
+The  `readr::read_csv()` function will also print out a helpful message explaining what its guesses were.
 
 ~~~
 Parsed with column specification:
@@ -308,6 +312,8 @@ cols(
   sample_id = col_character(),
   CHROM = col_character(),
   ID = col_logical(),
+  ...
+  etc
 ~~~
 {: .language-r}
 
@@ -318,7 +324,7 @@ Often you will need to explicitly tell `read_csv()` what kind of data is in each
 Of course, usually you will have a good idea of what kind of data you are loading.
 This data is a bit unusual because I have just given it to you with very little explanation.
 (Although this kind of situation is unfortunately quite common for bioinformaticians...)
-So will first examine the data and then later return to the question of what kind of data should be in each column.
+So we will first examine the data and then later return to the question of what kind of data should be in each column.
 
 ## Summarizing and determining the structure of a data frame.
 
@@ -494,6 +500,7 @@ Ok, thats a lot up unpack! Some things to notice.
 - Each variable (column) has a name (e.g. `sample_id`). This is followed
   by the object mode (e.g. factor, int, num, etc.). Notice that before each
   variable name there is a `$` - this will be important later.
+- Below all the variables you can see the "spec" attribute. This is the column specification used by `readr::read_csv()` to load the data. We'll review this shortly.
 
 You may have noticed that the data type is actually `tibble` rather than `data.frame`.
 A `tibble` is essentially a simplified `data frame`.
@@ -545,6 +552,59 @@ If not, ask your instructor to provide one.
 {: .challenge}
 
 Now that you have had a closer look at the data, and have a bit better understanding of what kind of data should be in each column, you can return to the little script that you wrote to load data with the `read_csv()` function.
+
+## Reloading the data
+
+Now that we have a better sense of what kind of data we are looking at, let's review the way that is was loaded.
+Edit your `load_data.R` script so that it looks like the following.
+Basically we are just copying and pasting the "cols" specification from the information returned by `str(variants)` above as the value of the `col_types` argument.
+Note that we are still only calling one function (namely `readr::read_csv()`) with only two arguments (`file` and `col_types`) but the **value** of the `col_types` argument is generated by the `cols()` helper function.
+Inside the `cols()` function, the value of each of the arguments is generated by calls to helper functions such as `col_character()` and `col_logical()`.
+This kind of function-within-a-function situation is very common in R, and can lead to quite convoluted code.
+R itself is indifferent as to whether you write a function call all on one line or break it up over multiple lines (as shown below).
+But you can dramatically improve readability by placing each argument on a separate line, and indenting functions within functions.
+There is a neat shortcut that allows you to quickly reformat code based on these principles: highlight the code and press <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>A</kbd> on a Mac or  <kbd>control</kbd>+<kbd>shift</kbd>+<kbd>A</kbd> on a Windows machine.
+
+~~~
+# read in a CSV file and save it as 'variants'
+library(readr)
+variants <- readr::read_csv(
+  file = "data-raw/combined_tidy_vcf.csv",
+  col_types = cols(
+      sample_id = col_character(),
+      CHROM = col_character(),
+      POS = col_double(),
+      ID = col_logical(),
+      REF = col_character(),
+      ALT = col_character(),
+      QUAL = col_double(),
+      FILTER = col_logical(),
+      INDEL = col_logical(),
+      IDV = col_double(),
+      IMF = col_double(),
+      DP = col_double(),
+      VDB = col_double(),
+      RPB = col_double(),
+      MQB = col_double(),
+      BQB = col_double(),
+      MQSB = col_double(),
+      SGB = col_double(),
+      MQ0F = col_double(),
+      ICB = col_logical(),
+      HOB = col_logical(),
+      AC = col_double(),
+      AN = col_double(),
+      DP4 = col_character(),
+      MQ = col_double(),
+      Indiv = col_character(),
+      gt_PL = col_number(),
+      gt_GT = col_double(),
+      gt_GT_alleles = col_character()
+  )
+)
+~~~
+{: .language-r}
+
 
 
 
