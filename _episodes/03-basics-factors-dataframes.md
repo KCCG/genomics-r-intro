@@ -271,7 +271,14 @@ We'll use the `read_csv()` function from the `readr` package.
 The name of this function is confusingly similar to the `read.csv()` function in `base`, so we'll prefix it with the package name (readr) for extra clarity.
 This involves a little bit of extra typing, but it is a good habit to get into and you can use the power of auto-complete to avoid errors anyway.
 
-We'll call this data `variants`. 
+The `readr::read_csv()` function is quite good at figuring out how to import CSV files.
+Often all you need to do is specify a file name.
+(It doesn't always get it right, so you'll need to make a habit of checking the data after it is loaded.)
+But, like `base::read.csv()`, the `readr::read_csv()` function has a lot of options for fine-tuning the loading process.
+Use "?readr::read_csv" to quickly peruse the function reference, and also do a quick Google search to find the online documentation.
+See if you can find a "cheatsheet" for the `readr` package.
+
+We'll store the data in a variable called `variants`. 
 The first argument to pass to our `readr::read_csv()` function is the file path for our data. 
 This can be a **relative** path (relative to our work directory). 
 The file path must be in quotes and now is a good time to remember to use tab autocompletion.
@@ -530,7 +537,7 @@ If not, ask your instructor to provide one.
 > Compare the VCF files from the previous course to the CSV file that you just loaded.
 > What is similar? And what is different?
 > How have the VCF files been processed to create the CSV file?
-> No need to get too detailed, a general intuition will be fine here.
+> No need to actually transform or load the data yourself, and don't go into too much detail, a general intuition will be fine here.
 >
 >> ## Solution
 >>
