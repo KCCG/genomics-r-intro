@@ -338,6 +338,14 @@ ggplot(data = variants, aes(x = INDEL, fill = sample_id)) +
 > {: .solution}
 {: .challenge}
 
+## Saving plots
+
+The `ggsave()` function allows you to save plots to files.
+This is essential on the cluster, where you don't have the convencience of an `Export` button in the `Plots` tab.
+The two key arguments are `filename` (the name to use for the file created) and `plot` (which ggplot object to save).
+By default, `ggsave()` saves the most recent ggplot object that you worked on, so sometimes you can skip it.
+There are options for specifying the height and width etc, but `ggsave` is clever enough to work out the appropriate file format based on the extension of the file name (png, pdf, etc).
+
 ## **`ggplot2`** themes
 
 In addition to `theme_bw()`, which changes the plot background to white, **`ggplot2`**
