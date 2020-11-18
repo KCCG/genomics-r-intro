@@ -84,6 +84,46 @@ memory. The database connections essentially remove that limitation in that you
 can have a database of many 100s GB, conduct queries on it directly and pull
 back just what you need for analysis in R.
 
+### An easy way to rename columns
+
+The `dplyr::rename()` function makes it easier to rename columns.
+Remember that convoluted expression that you saw for renaming columns in the previous chapter?
+Here is a much easier way to achieve the same thing.
+
+~~~
+dplyr::rename(variants, strain = sample_id)
+~~~
+{: .language-r}
+
+
+The basic pattern is "new_name = old_name", where "old_name" is the current column name in the dataframe as it exists now, and "new_name" is what you want to call it from now on.
+
+Two important things to note here.
+First, this function creates a NEW dataframe. It doesn't update the existing dataframe.
+If you want to SAVE the changes, then you need to assign the results to a variable, as shown below.
+
+~~~
+new_dataframe <- dplyr::rename(variants, strain = sample_id)
+~~~
+{: .language-r}
+
+If you don't want your variables to proliferate out of control then you can recycle the current name, like this.
+
+~~~
+# Don't actually run this code, or the examples below won't work
+variants <- dplyr::rename(variants, strain = sample_id)
+~~~
+{: .language-r}
+
+After you run this code, then the variable "variants" will now point to a dataframe where the name of the "sample_id" column has been changed to "stain" (but everything else is still the same).
+
+This comment about *creating* datafames versus *manipulating* dataframes applies to the other functions in this chapter.
+These functions return NEW dataframes - if you want to save the output then assign it to a variable.
+
+The second thing to note is that this function takes an `expression` for one of its arguments.
+Here "strain = sample_id" is an *expression*. 
+The whole expression gets passed to the function, which processes it internally in order to do its magic.
+
 ### Selecting columns and filtering rows
 
 To select columns of a
@@ -92,7 +132,7 @@ frame (`variants`), and the subsequent arguments are the columns to keep.
 
 
 ~~~
-select(variants, sample_id, REF, ALT, DP)
+dplyr::select(variants, sample_id, REF, ALT, DP)
 ~~~
 {: .language-r}
 
@@ -107,12 +147,18 @@ select(variants, sample_id, REF, ALT, DP)
 ~~~
 {: .output}
 
+You can also rename columns at the same time as you select them.
+~~~
+dplyr::select(variants, sample_id, reference=REF, alternative=ALT, DP)
+~~~
+{: .language-r}
+The pattern here is the same as the `dplyr::rename()` function above: "new_name = old_name".
+
 To select all columns *except* certain ones, put a "-" in front of
 the variable to exclude it.
 
-
 ~~~
-select(variants, -CHROM)
+dplyr::select(variants, -CHROM)
 ~~~
 {: .language-r}
 
