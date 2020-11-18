@@ -1494,8 +1494,10 @@ You can rename columns:
 ~~~
 colnames(variants)[colnames(variants) == "sample_id"] <- "strain"
 
-# check the column name (hint names are returned as a vector)
+# check the column name (hint: names are returned as a vector)
 colnames(variants)
+
+# There is a MUCH easier way to do this. Stay tuned for the next chapter.
 ~~~
 {: .language-r}
 
@@ -1520,7 +1522,7 @@ to a .csv file using the `readr::write_csv()` function:
 
 
 ~~~
-readr::write_csv(SRR2584863_variants, file = "../data/SRR2584863_variants.csv")
+readr::write_csv(SRR2584863_variants, file = "data/SRR2584863_variants.csv")
 ~~~
 {: .language-r}
 
