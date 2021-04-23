@@ -76,7 +76,7 @@ You can stick with the default (HTML output), but give it a title.
 
 ## Basic components of R Markdown
 
-The initial chunk of text contains instructions for R: you give the
+The initial header chunk of text contains instructions for R: you give the
 thing a title, author, and date, and tell it that you're going to want
 to produce html output (in other words, a web page).
 
@@ -116,7 +116,7 @@ as you would in an email rather than writing html code. The marked-up
 text gets _converted_ to html, replacing the marks with the proper
 html code.
 
-For now, let's delete all of the stuff that's there and write a bit of
+For now, let's delete all of the stuff below the initial header chunk and write a bit of
 markdown.
 
 You make things **bold** using two asterisks, like this: `**bold**`,
@@ -168,8 +168,11 @@ with some number of `#` symbols:
 
 ```
 # Title
+
 ## Main section
+
 ### Sub-section
+
 #### Sub-sub section
 ```
 
